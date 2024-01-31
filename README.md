@@ -1,6 +1,6 @@
 # Employee Management System
 
-#  EmployeeController
+## EmployeeController
 Base URL: /api
 
 POST / : Create a new employee. It takes an EmployeeRequest as input and returns a EmployeeResponse.
