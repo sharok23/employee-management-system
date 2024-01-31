@@ -1,4 +1,5 @@
 # Employee Management System
+This project provides a RESTful API for an Employee Management System application. Employees can be added, retrieved by id and retrieved by department.
 
 ## EmployeeController
 Base URL: /api
