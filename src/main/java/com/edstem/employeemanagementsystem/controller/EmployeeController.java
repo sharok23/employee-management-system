@@ -17,11 +17,11 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/employees/")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-    @PostMapping("/create")
+    @PostMapping()
     public EmployeeResponse addEmployee(@Valid @RequestBody EmployeeRequest request){
         return employeeService.addEmployee(request);
     }
