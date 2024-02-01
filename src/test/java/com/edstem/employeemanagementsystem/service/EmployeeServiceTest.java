@@ -11,7 +11,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -23,21 +22,21 @@ import static org.mockito.Mockito.when;
 
 @RequiredArgsConstructor
 public class EmployeeServiceTest {
-    private  EmployeeService employeeService;
-    private  EmployeeRepository employeeRepository;
+    private EmployeeService employeeService;
+    private EmployeeRepository employeeRepository;
     private ModelMapper modelMapper;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         MockitoAnnotations.openMocks(this);
         employeeRepository = Mockito.mock(EmployeeRepository.class);
         modelMapper = new ModelMapper();
-        employeeService = new EmployeeService(employeeRepository,modelMapper);
+        employeeService = new EmployeeService(employeeRepository, modelMapper);
     }
 
     @Test
-    void testAddEmployee(){
-        EmployeeRequest request = new EmployeeRequest("Sharok","sharok@gmail.com","Development");
+    void testAddEmployee() {
+        EmployeeRequest request = new EmployeeRequest("Sharok", "sharok@gmail.com", "Development");
         Employee employee = modelMapper.map(request, Employee.class);
         EmployeeResponse expectedResponse = modelMapper.map(employee, EmployeeResponse.class);
 
@@ -49,9 +48,9 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    void viewEmployeeById(){
+    void viewEmployeeById() {
         Long id = 1L;
-        Employee employee = new Employee(id,"Sharok","sharok@gmail.com","Development");
+        Employee employee = new Employee(id, "Sharok", "sharok@gmail.com", "Development");
         EmployeeResponse expectedResponse = modelMapper.map(employee, EmployeeResponse.class);
         when(employeeRepository.findById(id)).thenReturn(Optional.of(employee));
 
@@ -64,18 +63,16 @@ public class EmployeeServiceTest {
     void testViewSongsByAlbum() {
         String department = "Development";
         Employee employeeOne =
-                new Employee(1L,"Sharok","sharok@gmail.com", department);
+                new Employee(1L, "Sharok", "sharok@gmail.com", department);
         Employee employeeTwo =
-                new Employee(1L,"Midun","Midun@gmail.com", department);
+                new Employee(1L, "Midun", "Midun@gmail.com", department);
 
         List<Employee> employees = Arrays.asList(employeeOne, employeeTwo);
         List<EmployeeResponse> expectedResponse = employees.stream().map(employee ->
-                modelMapper.map(employee,EmployeeResponse.class)).collect(Collectors.toList());
+                modelMapper.map(employee, EmployeeResponse.class)).collect(Collectors.toList());
 
         when(employeeRepository.findByDepartment(department)).thenReturn(employees);
-        List<EmployeeResponse> actualResponse = employeeRepository.findByDepartment(department);
+        List<EmployeeResponse> actualResponse = employeeService.viewEmployeeByDepartment(department);
         assertEquals(expectedResponse, actualResponse);
-
-
     }
 }
