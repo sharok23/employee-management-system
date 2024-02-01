@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -55,6 +56,24 @@ public class EmployeeServiceTest {
         when(employeeRepository.findById(id)).thenReturn(Optional.of(employee));
 
         EmployeeResponse actualResponse = employeeService.viewEmployeeById(id);
+        assertEquals(expectedResponse, actualResponse);
+
+    }
+
+    @Test
+    void testViewSongsByAlbum() {
+        String department = "Development";
+        Employee employeeOne =
+                new Employee(1L,"Sharok","sharok@gmail.com", department);
+        Employee employeeTwo =
+                new Employee(1L,"Midun","Midun@gmail.com", department);
+
+        List<Employee> employees = Arrays.asList(employeeOne, employeeTwo);
+        List<EmployeeResponse> expectedResponse = employees.stream().map(employee ->
+                modelMapper.map(employee,EmployeeResponse.class)).collect(Collectors.toList());
+
+        when(employeeRepository.findByDepartment(department)).thenReturn(employees);
+        List<EmployeeResponse> actualResponse = employeeRepository.findByDepartment(department);
         assertEquals(expectedResponse, actualResponse);
 
 
