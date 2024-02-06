@@ -6,12 +6,11 @@ import com.edstem.employeemanagementsystem.exception.EntityAlreadyExistsExceptio
 import com.edstem.employeemanagementsystem.exception.EntityNotFoundException;
 import com.edstem.employeemanagementsystem.model.Employee;
 import com.edstem.employeemanagementsystem.repository.EmployeeRepository;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -30,8 +29,10 @@ public class EmployeeService {
     }
 
     public EmployeeResponse viewEmployeeById(Long id) {
-        Employee employee = employeeRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException("Employee", id));
+        Employee employee =
+                employeeRepository
+                        .findById(id)
+                        .orElseThrow(() -> new EntityNotFoundException("Employee", id));
         return modelMapper.map(employee, EmployeeResponse.class);
     }
 
@@ -40,6 +41,8 @@ public class EmployeeService {
         if (employees.isEmpty()) {
             throw new EntityNotFoundException("Employee", department);
         }
-        return employees.stream().map(employee -> modelMapper.map(employee, EmployeeResponse.class)).collect(Collectors.toList());
+        return employees.stream()
+                .map(employee -> modelMapper.map(employee, EmployeeResponse.class))
+                .collect(Collectors.toList());
     }
 }

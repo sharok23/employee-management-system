@@ -21,5 +21,4 @@ public class EmployeeManagementSystemApplication {
                 .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
         return mapper;
     }
-
 }

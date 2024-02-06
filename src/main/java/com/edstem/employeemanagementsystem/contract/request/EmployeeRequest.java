@@ -9,7 +9,9 @@ import lombok.Getter;
 public class EmployeeRequest {
     @NotBlank(message = "Employee name should not be blank")
     private String name;
+
     @NotBlank(message = "Email should not be blank")
     private String email;
+
     private String department;
 }

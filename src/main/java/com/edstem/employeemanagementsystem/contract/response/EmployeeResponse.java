@@ -1,6 +1,5 @@
 package com.edstem.employeemanagementsystem.contract.response;
 
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -4,6 +4,7 @@ import com.edstem.employeemanagementsystem.contract.request.EmployeeRequest;
 import com.edstem.employeemanagementsystem.contract.response.EmployeeResponse;
 import com.edstem.employeemanagementsystem.service.EmployeeService;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -35,5 +34,4 @@ public class EmployeeController {
     public List<EmployeeResponse> viewEmployeeByDepartment(@RequestParam String department) {
         return employeeService.viewEmployeeByDepartment(department);
     }
-
 }
