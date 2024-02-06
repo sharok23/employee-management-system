@@ -46,7 +46,7 @@ public class EmployeeControllerTest {
     }
 
     @Test
-    void TestviewEmployeeById() throws Exception {
+    void TestViewEmployeeById() throws Exception {
         Long id = 1L;
         EmployeeResponse expectedResponse = new EmployeeResponse(1L, "Sharok", "sharok@gmail.com", "Development");
         when(employeeService.viewEmployeeById(id)).thenReturn(expectedResponse);
