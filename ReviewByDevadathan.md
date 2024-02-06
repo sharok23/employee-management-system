@@ -5,3 +5,7 @@
              if (employeeRepository.existsByName(request.getName())) {
                          throw new EntityAlreadyExistsException("Employee");
                      }
+
+## Application.yml
+
+##### Have used username and password in yml.
