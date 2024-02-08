@@ -67,7 +67,7 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    void testViewSongsByAlbum() {
+    void testEmployeeByDepartment() {
         String department = "Development";
         Employee employeeOne = new Employee(1L, "Sharok", "sharok@gmail.com", department);
         Employee employeeTwo = new Employee(1L, "Midun", "Midun@gmail.com", department);
