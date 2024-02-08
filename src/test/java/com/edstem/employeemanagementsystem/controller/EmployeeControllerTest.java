@@ -29,7 +29,7 @@ public class EmployeeControllerTest {
     @MockBean private EmployeeService employeeService;
 
     @Test
-    void TestAddEmployee() throws Exception {
+    void testAddEmployee() throws Exception {
         EmployeeRequest request = new EmployeeRequest("Sharok", "sharok@gmail.com", "Development");
         EmployeeResponse expectedResponse =
                 new EmployeeResponse(1L, "Sharok", "sharok@gmail.com", "Development");
@@ -44,7 +44,7 @@ public class EmployeeControllerTest {
     }
 
     @Test
-    void TestViewEmployeeById() throws Exception {
+    void testViewEmployeeById() throws Exception {
         Long id = 1L;
         EmployeeResponse expectedResponse =
                 new EmployeeResponse(1L, "Sharok", "sharok@gmail.com", "Development");
@@ -57,7 +57,7 @@ public class EmployeeControllerTest {
     }
 
     @Test
-    void TestViewEmployeeByDepartment() throws Exception {
+    void testViewEmployeeByDepartment() throws Exception {
         String department = "Development";
         List<EmployeeResponse> employeeResponse = new ArrayList<>();
         employeeResponse.add(new EmployeeResponse(1L, "Sharok", "sharok@gmail.com", department));

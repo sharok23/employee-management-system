@@ -1,27 +1,28 @@
 package com.edstem.employeemanagementsystem.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
 import com.edstem.employeemanagementsystem.contract.request.EmployeeRequest;
 import com.edstem.employeemanagementsystem.contract.response.EmployeeResponse;
 import com.edstem.employeemanagementsystem.exception.EntityAlreadyExistsException;
 import com.edstem.employeemanagementsystem.exception.EntityNotFoundException;
 import com.edstem.employeemanagementsystem.model.Employee;
 import com.edstem.employeemanagementsystem.repository.EmployeeRepository;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @RequiredArgsConstructor
 public class EmployeeServiceTest {
@@ -43,10 +44,10 @@ public class EmployeeServiceTest {
         Employee employee = modelMapper.map(request, Employee.class);
         EmployeeResponse expectedResponse = modelMapper.map(employee, EmployeeResponse.class);
 
-        when(employeeRepository.existsByName(request.getName())).thenReturn(true);
+        when(employeeRepository.existsByEmail(request.getName())).thenReturn(true);
         assertThrows(
                 EntityAlreadyExistsException.class, () -> employeeService.addEmployee(request));
-        when(employeeRepository.existsByName(request.getName())).thenReturn(false);
+        when(employeeRepository.existsByEmail(request.getName())).thenReturn(false);
         when(employeeRepository.save(any())).thenReturn(employee);
 
         EmployeeResponse actualResponse = employeeService.addEmployee(request);

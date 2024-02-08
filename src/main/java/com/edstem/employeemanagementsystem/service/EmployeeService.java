@@ -6,11 +6,12 @@ import com.edstem.employeemanagementsystem.exception.EntityAlreadyExistsExceptio
 import com.edstem.employeemanagementsystem.exception.EntityNotFoundException;
 import com.edstem.employeemanagementsystem.model.Employee;
 import com.edstem.employeemanagementsystem.repository.EmployeeRepository;
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class EmployeeService {
     private final ModelMapper modelMapper;
 
     public EmployeeResponse addEmployee(EmployeeRequest request) {
-        if (employeeRepository.existsByName(request.getName())) {
+        if (employeeRepository.existsByEmail(request.getName())) {
             throw new EntityAlreadyExistsException("Employee");
         }
         Employee newEmployee = modelMapper.map(request, Employee.class);
